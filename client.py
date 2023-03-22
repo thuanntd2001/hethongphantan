@@ -2,7 +2,7 @@ from dsystem import Client
 
 def do_license():
     try:
-        print("Wating for reponse...")
+        print("Đợi phản hồi từ máy chủ...")
         client.license()
         print("Ok")
     except Exception as ex:
@@ -10,27 +10,27 @@ def do_license():
 
 def do_release():
     try:
-       print("Wating for reponse...")
+       print("Đợi phản hồi từ máy chủ...")
        client.release()
        print("Ok")
     except Exception as ex:
         print(ex)
 
 def do_config():
-    host = input("Host: ")
-    port = int(input("Port: "))
+    host = input("Máy chủ: ")
+    port = int(input("Cổng: "))
     client.config((host, port))
 
 def do_status():
-    states = {0: 'Nothing', 1: 'Wating', 2: 'Licensed'}
+    states = {0: 'Chưa có gì', 1: 'Đang đợi', 2: 'Đã cho phép'}
     print(states[client.status])
 
 def do_configs():
-    print("Host:", client.server_address[0])
-    print("Port:", client.server_address[1])
+    print("Máy chủ:", client.server_address[0])
+    print("Cổng:", client.server_address[1])
 
-host = input("Host: ")
-port = int(input("Port: "))
+host = input("Máy chủ: ")
+port = int(input("Cổng: "))
 
 status = 0
 client = Client((host, port))
@@ -50,4 +50,4 @@ while True:
     elif com == "exit":
         exit()
     else:
-        print("'{}' not found".format(com))
+        print("'{}' không tìm thấy".format(com))
