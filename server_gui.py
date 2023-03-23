@@ -12,10 +12,10 @@ def close_button_click():
 def licensed_client_on_changed(server, client):
     if client == None:
        
-        licensed_client_label.config(text="Clients được cấp phép: Chưa có ai")
+        licensed_client_label.config(text="Clients được cấp phép: Chưa có ai" ,font=("Arial", 8, "bold"), fg="black", bg="white")
         return
 
-    licensed_client_label.config(text="Clients được cấp phép: " + client[0][0])
+    licensed_client_label.config(text="Clients được cấp phép: " + client[0][0],font=("Arial", 8, "bold"), fg="black", bg="white")
 
 def waiting_clients_on_changed(server, waiting_list):
     for i in waiting_clients_list.get_children():
@@ -47,7 +47,7 @@ window.configure(bg="green")
 # XIN CHÀO
 hello_client_label= tk.Label(text="Xin chào máy chủ: " + server.get_ip(), font=("Arial", 18), fg="blue", bg="yellow")
 #  licensed_client label
-licensed_client_label = tk.Label(text="Clients được cấp phép: Chưa có ai", fg= "red", bg="white")
+licensed_client_label = tk.Label(text="Clients được cấp phép: Chưa có ai",font=("Arial", 8, "bold"), fg="black", bg="white")
 
 #  Waiting clients label
 waiting_clients_label = tk.Label(text="Đang chờ Clients",font=("Arial", 10, "bold"), bg="pink")
@@ -65,18 +65,18 @@ waiting_clients_list.heading("Địa chỉ IP", text="Địa chỉ IP", anchor=t
 waiting_clients_list.heading("Cổng port",text="Cổng port", anchor=tk.CENTER)
 
 # Logs label
-logs_label = tk.Label(text="    Đăng nhập    ",font=("Arial", 10, "bold"), bg="pink")
+logs_label = tk.Label(text="Được cấp phép ",font=("Arial", 10, "bold"), bg="pink")
 
 # Waiting clients
 logs_list = ttk.Treeview()
-logs_list['columns'] = ("Đăng nhập", "Thời gian")
+logs_list['columns'] = ("Được cấp phép", "Thời gian")
 
 logs_list.column("#0", width=0, stretch=tk.NO)
-logs_list.column("Đăng nhập", anchor=tk.CENTER, width=400)
+logs_list.column("Được cấp phép", anchor=tk.CENTER, width=400)
 logs_list.column("Thời gian", anchor=tk.CENTER, width=160)
 
 logs_list.heading("#0", text="", anchor=tk.CENTER)
-logs_list.heading("Đăng nhập", text="Đăng nhập", anchor=tk.CENTER)
+logs_list.heading("Được cấp phép", text="Được cấp phép", anchor=tk.CENTER)
 logs_list.heading("Thời gian",text="Thời gian", anchor=tk.CENTER)
 
 # Close button
