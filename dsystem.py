@@ -35,36 +35,36 @@ class Server:
             rev = conn.recv(1024)
             if rev == b"license":
                 if self.licensed_client and self.licensed_client[0][0] == addr[0]:
-                    conn.send(b"Request denied, because the client has been licensed")
+                    conn.send(b"Yeu cau bi tu choi vi client chua duoc cap phep")
                     continue
 
                 if self.waiting_clients == [] and self.licensed_client == None:
                     self.licensed_client = (addr, conn)
                     self.licensed_client[1].send(b"OK")
-                    self.logs.append(("{} has been licensed".format(self.licensed_client[0][0]), datetime.now()))
+                    self.logs.append(("{} đã được cấp phép".format(self.licensed_client[0][0]), datetime.now()))
 
                     # Event
-                    if logs_on_changed: logs_on_changed(self, ("{} has been licensed".format(self.licensed_client[0][0]), datetime.now()))
+                    if logs_on_changed: logs_on_changed(self, ("{} đã được cấp phép".format(self.licensed_client[0][0]), datetime.now()))
                     if licensed_client_on_changed: licensed_client_on_changed(self, self.licensed_client)
 
                     continue
 
                 self.waiting_clients.append((addr, conn))
-                self.logs.append(("{} has been added to the waiting list".format(addr[0]), datetime.now()))
+                self.logs.append(("{} đã được thêm vào hàng đợi".format(addr[0]), datetime.now()))
 
                 # Event
-                if logs_on_changed: logs_on_changed(self, ("{} has been added to the waiting list".format(addr[0]), datetime.now()))
+                if logs_on_changed: logs_on_changed(self, ("{} đã được thêm vào hàng đợi".format(addr[0]), datetime.now()))
                 if waiting_clients_on_changed: waiting_clients_on_changed(self, self.waiting_clients)
             elif rev == b"release":
                 if (self.licensed_client is None) or (self.licensed_client[0][0] != addr[0]):
-                    conn.send(b"Request denied, because the client has not been licensed")
+                    conn.send(b"Yeu cau bi tu choi vi client chua duoc cap phep")
                     continue
 
                 conn.send(b"OK")
 
-                self.logs.append(("{} license has been revoked".format(self.licensed_client[0][0]), datetime.now()))
+                self.logs.append(("{} license đã bị thu hồi".format(self.licensed_client[0][0]), datetime.now()))
                 # Event
-                if logs_on_changed: logs_on_changed(self, ("{} license has been revoked".format(self.licensed_client[0][0]), datetime.now()))
+                if logs_on_changed: logs_on_changed(self, ("{} license đã bị thu hồi".format(self.licensed_client[0][0]), datetime.now()))
 
                 self.licensed_client = None
                 # Event
@@ -73,14 +73,14 @@ class Server:
                 if self.waiting_clients:
                     self.licensed_client = self.waiting_clients.pop(0)
                     self.licensed_client[1].send(b"OK")
-                    self.logs.append(("{} has been licensed".format(self.licensed_client[0][0]), datetime.now()))
+                    self.logs.append(("{} đã bị thu hồi".format(self.licensed_client[0][0]), datetime.now()))
 
                     # Event
-                    if logs_on_changed: logs_on_changed(self, ("{} has been licensed".format(self.licensed_client[0][0]), datetime.now()))
+                    if logs_on_changed: logs_on_changed(self, ("{} đã bị thu hồi".format(self.licensed_client[0][0]), datetime.now()))
                     if licensed_client_on_changed: licensed_client_on_changed(self, self.licensed_client)
                     if waiting_clients_on_changed: waiting_clients_on_changed(self, self.waiting_clients)
             else:
-                conn.send(b"Request denied, because '" + rev + "' does not exist")
+                conn.send(b"yeu cau tu choi, vi '" + rev + "' khong ton tai")
 
         s.close()
 
