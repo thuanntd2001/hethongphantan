@@ -103,7 +103,7 @@ class Client:
         _status = self.status
 
         if self.status != 0:
-            raise Exception("Request denied, because of invalid status!")
+            raise Exception("Yêu cầu bị từ chối vì vi phạm trạng thái!")
 
         self.status = 1
 
@@ -119,7 +119,7 @@ class Client:
         _status = self.status
 
         if self.status != 2:
-            raise Exception("Request denied, because of invalid status!")
+            raise Exception("Yêu cầu bị từ chối vì vi phạm trạng thái!")
 
         self.status = 1
 
