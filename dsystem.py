@@ -73,10 +73,10 @@ class Server:
                 if self.waiting_clients:
                     self.licensed_client = self.waiting_clients.pop(0)
                     self.licensed_client[1].send(b"OK")
-                    self.logs.append(("{} đã bị thu hồi".format(self.licensed_client[0][0]), datetime.now()))
+                    self.logs.append(("{} đã được cấp phép".format(self.licensed_client[0][0]), datetime.now()))
 
                     # Event
-                    if logs_on_changed: logs_on_changed(self, ("{} đã bị thu hồi".format(self.licensed_client[0][0]), datetime.now()))
+                    if logs_on_changed: logs_on_changed(self, ("{} đã được cấp phép".format(self.licensed_client[0][0]), datetime.now()))
                     if licensed_client_on_changed: licensed_client_on_changed(self, self.licensed_client)
                     if waiting_clients_on_changed: waiting_clients_on_changed(self, self.waiting_clients)
             else:
