@@ -35,7 +35,7 @@ class Server:
             rev = conn.recv(1024)
             if rev == b"license":
                 if self.licensed_client and self.licensed_client[0][0] == addr[0]:
-                    conn.send(b"Yeu cau bi tu choi vi client chua duoc cap phep")
+                    conn.send(b"Yeu cau bi tu choi vi client da duoc cap phep")
                     continue
 
                 if self.waiting_clients == [] and self.licensed_client == None:
